@@ -6,15 +6,6 @@ var lettersL= [ ]
 var numericC = ['0','1','2','3','4','5','6','7','8','9']
 var specialK = ['!','@','#','$','%','&']
 
-// var userInNum = window.confirm("Would you like to use numbers?")
-// var userInUppercase = window.confirm("Would you like to use Uppercase characters?")
-// var userInLowercase = window.confirm("Would you like to use lowercase characters?")
-// var userInSymbol = window.confirm("Would you like to use symbols?")
-
-// for(let letter of lettersU){
-//   lettersL.push(letter.toLowerCase());
-// // }
-// console.log(lettersU, lettersL);
 function randomNumber(min, max) {
   return Math.floor(Math.random()*(max - min) + min)
 }
@@ -61,7 +52,9 @@ var passParam = []
     var randomList = getItem(passParam)
     var randomCharacter = getItem(randomList)
     console.log(randomCharacter)
+    newPassword += randomCharacter
   }
+  return newPassword
 }
 
 // Write password to the #password input
