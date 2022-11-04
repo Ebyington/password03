@@ -17,43 +17,45 @@ function getItem(list) {
 function generatePassword() {
   var userInput = window.prompt("Enter password length 8-128 characters?")
   var pwLength = parseInt(userInput)
+  //  boolean variables for password parameters with modal confirm window
+  var userInNum = window.confirm("Would you like to use numbers?")
+  var userInUppercase = window.confirm("Would you like to use Uppercase characters?")
+  var userInLowercase = window.confirm("Would you like to use lowercase characters?")
+  var userInSymbol = window.confirm("Would you like to use symbols?")
+  var passParam = []
+
 
   if (pwLength < 8 ) {
     return false;
   } else {
     
   }
-//  boolean variables for password parameters with modal confirm window
-var userInNum = window.confirm("Would you like to use numbers?")
-var userInUppercase = window.confirm("Would you like to use Uppercase characters?")
-var userInLowercase = window.confirm("Would you like to use lowercase characters?")
-var userInSymbol = window.confirm("Would you like to use symbols?")
-var passParam = []
-
   for (var i = 0; i < lettersU.length; i++) {
     lettersL[i] = lettersU[i].toLowerCase()
   }
   if (userInNum === true) {
-    passParam.push(userInNum)
+    passParam.push(numericC)
   } 
   if (userInLowercase === true) {
-    passParam.push(userInLowercase)
+    passParam.push(lettersL)
   }
   if (userInUppercase === true) {
-    passParam.push(userInUppercase) 
+    passParam.push(lettersU) 
   }
   if (userInSymbol === true) {
-    passParam.push(userInSymbol)
+    passParam.push(specialK)
   }
-  console.log(passParam)
+  
   var newPassword = ""
   
   for (var i = 0; i < pwLength; i ++) {
     var randomList = getItem(passParam)
     var randomCharacter = getItem(randomList)
-    console.log(randomCharacter)
+   
+    
     newPassword += randomCharacter
   }
+ 
   return newPassword
 }
 
@@ -65,9 +67,6 @@ function writePassword() {
   passwordText.value = password;
 
 }
-
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
