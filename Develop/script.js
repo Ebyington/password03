@@ -6,36 +6,58 @@ var lettersL= [ ]
 var numericC = ['0','1','2','3','4','5','6','7','8','9']
 var specialK = ['!','@','#','$','%','&']
 
-// var userInNum = window.confirm("Would you like to use numbers?")
-// var userInUppercase = window.confirm("Would you like to use Uppercase characters?")
-// var userInLowercase = window.confirm("Would you like to use lowercase characters?")
-// var userInSymbol = window.confirm("Would you like to use symbols?")
+function randomNumber(min, max) {
+  return Math.floor(Math.random()*(max - min) + min)
+}
 
-// for(let letter of lettersU){
-//   lettersL.push(letter.toLowerCase());
-// // }
-// console.log(lettersU, lettersL);
+function getItem(list) {
+  return list[randomNumber(0, list.length - 1 )]
+}
 
 function generatePassword() {
   var userInput = window.prompt("Enter password length 8-128 characters?")
   var pwLength = parseInt(userInput)
+  //  boolean variables for password parameters with modal confirm window
+  var userInNum = window.confirm("Would you like to use numbers?")
+  var userInUppercase = window.confirm("Would you like to use Uppercase characters?")
+  var userInLowercase = window.confirm("Would you like to use lowercase characters?")
+  var userInSymbol = window.confirm("Would you like to use symbols?")
+  var passParam = []
+
 
   if (pwLength < 8 ) {
     return false;
   } else {
     
   }
-
-  var userInNum = window.confirm("Would you like to use numbers?")
-  var userInUppercase = window.confirm("Would you like to use Uppercase characters?")
-  var userInLowercase = window.confirm("Would you like to use lowercase characters?")
-  var userInSymbol = window.confirm("Would you like to use symbols?")
-  
   for (var i = 0; i < lettersU.length; i++) {
     lettersL[i] = lettersU[i].toLowerCase()
   }
+  if (userInNum === true) {
+    passParam.push(numericC)
+  } 
+  if (userInLowercase === true) {
+    passParam.push(lettersL)
+  }
+  if (userInUppercase === true) {
+    passParam.push(lettersU) 
+  }
+  if (userInSymbol === true) {
+    passParam.push(specialK)
+  }
+  
+  var newPassword = ""
+  
+  for (var i = 0; i < pwLength; i ++) {
+    var randomList = getItem(passParam)
+    var randomCharacter = getItem(randomList)
+   
+    
+    newPassword += randomCharacter
+  }
+ 
+  return newPassword
 }
-
 
 // Write password to the #password input
 function writePassword() {
@@ -45,9 +67,6 @@ function writePassword() {
   passwordText.value = password;
 
 }
-
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
